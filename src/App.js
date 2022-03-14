@@ -8,7 +8,8 @@ const App = () => {
   const [imageList, setImageList] = useState([]);
   const [contactList, setContactList] = useState([]);
 
-  useEffect(async () => {
+  useEffect( ()=>{
+    async function fetchdata () {
     //fetching imagelist
     await randomuser
       .get("?results=10")
@@ -28,14 +29,16 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }
+  fetchdata();
+}, []);
 
   return (
     <div className="bg-white-100 pt-3">
       <section className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 p-20">
         {(contactList.length === 0) & (imageList.length === 0) ? (
-          <div class=" flex justify-center items-center">
-            <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          <div className ="flex justify-center items-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
           </div>
         ) : (
           contactList.map((contact, index) => (
